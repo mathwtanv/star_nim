@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Star Nim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>St★r Nim</h1>
+  </header>
+
+<div style="display: flex; align-items: flex-start; gap: 20px;">
+
+  <!-- Player indicator + restart button -->
+  <div id="texts-container" style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Berkshire Swash', cursive;
+    margin-top: 250px;">
+    <div id="texts">
+      <span id="player-label" style="color: #585858;">Player</span> <span id="playerNumber" style="color: #86d4ea;">1</span>
+    </div>
+  <button id="resetBtn">Restart</button>
+  </div>
+
+
+  <main id="game-wrapper">
+    <div id="game" role="application" aria-label="Star Nim board"></div>
+  </main>
+
+  <!-- Info button -->
+<div id="info-btn-container" style="margin-top: 250px;">
+  <div id="info-btn">i</div>
+</div>
+
+<!-- Overlay -->
+<div id="info-overlay">
+  <div id="info-content">
+    <h2 class="overlay-title">Game Rules</h2>
+    <p class="overlay-text">
+      Welcome to Star Nim, a variant of the classic combinatorial game 'Nim'. A player's action each turn is simply removing a token from the board 
+      by selecting it and then clicking it.
+      <img src="images/1.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      The objective of this game is to be the <i>last</i> person to remove a token. 
+      It is often the case that some tokens are 'connected' to the selected token by a line. 
+      <img src="images/2.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      If there are two such tokens, you'll need to first select one of the two 
+      <img src="images/3.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      and then click either of the selected tokens once more to remove both. 
+      <img src="images/4.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      If there is only one token connected to the selected one (i.e. one connected token has already been removed), 
+      <img src="images/5.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      clicking on the selected token automatically removes its partner. 
+      <img src="images/6.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      If there are none connected to the selected token, 
+      <img src="images/7.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      it is still possible to remove the token on its own but – of course – it will not remove any other tokens along with it. 
+      <img src="images/8.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      Play continues in this way until there are no tokens left on the board.
+      As previously mentioned, the first person to remove all of the tokens wins. It is <strong>not</strong> necessary that only one token can be removed to win.
+      <img src="images/9.png" alt="first placement" style="display: block; margin: 1rem auto; max-width: 100%; height: auto;" /> 
+      Enjoy!
+    </p>
+  </div>
+</div>
+
+
+  <script src="script.js" defer></script>
+</body>
+</html>

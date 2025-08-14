@@ -1,0 +1,183 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #FDFBE6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Bungee', sans-serif;
+  justify-content: center;
+}
+
+.site-header {
+  color: #86d4ea;
+  margin-top: 30px;
+  margin-bottom: -10px; /* space between title and board */
+  font-size: 30px;
+}
+
+#game-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* fill remaining height so it centers naturally */
+  gap: 20px;
+  transform: scale(0.75);
+  margin-top: 10px; /* no forced top margin */
+}
+
+#game {
+  position: relative;
+  width: 768px;
+  height: 811px;
+  background-image: url('images/starnim.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: -150px;
+  left: -75px;
+}
+
+
+.controls {
+  margin: 10px 0;
+}
+
+button {
+  padding: 6px 12px;
+  margin: 0 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.peg {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(255, 229, 82);
+  opacity: 100%;
+  /* border: 2px solid black; */
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10; /* make sure it's on top */
+}
+
+.peg.selected {
+  outline: 2.5px solid black;
+  border-radius: 50%;
+}
+
+.peg.removed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#sidebar {
+  max-width: 300px;
+  text-align: left;
+}
+
+.player-label {
+  color: black;       /* or any color you like */
+  font-weight: bold;
+  font-size: 24px;
+  font-family: 'Berkshire Swash', cursive;
+}
+
+#resetBtn {
+  padding: 12px 24px;
+  font-size: 23px;
+  font-family: 'Berkshire Swash', cursive;
+  color: #FDFBE6;
+  background-color: rgb(251, 222, 56);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+
+#resetBtn:hover {
+  background-color: rgb(230, 199, 23);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.25);
+}
+
+#resetBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 4px rgba(0,0,0,0.2);
+}
+
+
+#status {
+  font-weight: bold;
+  margin-top: 10px;
+  color: darkred;
+}
+
+#info-btn {
+  width: 50px;            /* circle width */
+  height: 50px;           /* circle height */
+  background-color: #86d4ea;
+  color: #FDFBE6;
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;     /* makes it circular */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+  margin-top: 13px;
+  margin-left: -100px;
+}
+
+#info-overlay {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.6); /* semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  z-index: 100; /* on top of everything */
+  overflow-y: auto; /* allows vertical scrolling */
+  padding: 20px; /* optional: adds space around content for small screens */
+}
+
+#info-content {
+  background-color: #FDFBE6;
+  padding: 20px 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  max-height: 80vh; /* limits height to 80% of viewport */
+  overflow-y: auto; /* scrolls content inside box if too tall */
+  text-align: left;
+  font-family: 'Berkshire Swash', cursive;
+}
+
+
+#info-btn:hover {
+  background-color: #42c7ec;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.25);
+}
+
+#info-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 4px rgba(0,0,0,0.2);
+}
+
+.overlay-title {
+  text-align: center;
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.overlay-text {
+  font-family: 'Bitter', serif;
+  font-size: 18px;
+  color: #333;
+  line-height: 1.5;
+}
