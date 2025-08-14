@@ -49,6 +49,7 @@ button {
   font-size: 14px;
   cursor: pointer;
 }
+
 .peg {
   position: absolute;
   width: 50px;
@@ -128,7 +129,7 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   transition: all 0.2s ease;
-  margin-top: 13px;
+  margin-top: -27px;
   margin-left: -100px;
 }
 
