@@ -66,6 +66,8 @@ function removePegAndPartner(index) {
   const pegEl = pegElements[index];
   if (!pegEl || pegEl.classList.contains("removed")) return;
 
+  const lastPlayer = currentPlayer; // store player making the move
+
   // Compute live partners (connected & not removed)
   const partners = connections
     .filter(([a, b]) =>
@@ -74,9 +76,7 @@ function removePegAndPartner(index) {
     )
     .map(([a, b]) => (a === index ? b : a));
 
-  const lastPlayer = currentPlayer; // store player making the move
-
-  // No peg selected yet → select this one
+  // --- CASE: nothing selected yet ---
   if (selectedPegs.length === 0) {
     selectedPegs = [index];
     pegEl.classList.add("selected");
@@ -91,79 +91,61 @@ function removePegAndPartner(index) {
     )
     .map(([a, b]) => (a === first ? b : a));
 
-  // ----- CASE 0 or 1 partner -----
-  if (firstPartners.length <= 1) {
-    if (index === first) {
-      // Remove self or self+partner
-      pegElements[first].classList.add("removed");
-      if (firstPartners.length === 1) pegElements[firstPartners[0]].classList.add("removed");
+  // --- CASE: already two selected → third click resolves removal ---
+  if (selectedPegs.length === 2) {
+    if (selectedPegs.includes(index)) {
+      // Remove both
+      selectedPegs.forEach(i => pegElements[i].classList.add("removed"));
       selectedPegs = [];
       clearHighlights();
+    } else {
+      // Reset and select new
+      selectedPegs = [index];
+      clearHighlights();
+      pegEl.classList.add("selected");
+    }
 
-      if (checkWin()) {
-        document.getElementById("texts").innerHTML =
-          `<span id="player-label" style="color: #585858;">Player</span> <span id="playerNumber" style="color: #86d4ea;">${lastPlayer}</span> <span id="win-label" style="color: #585858;">wins!</span>`;
-        disableBoard();
-        return; // do NOT switch player
-      }
+    if (checkWin()) {
+      document.getElementById("texts").innerHTML =
+        `<span id="player-label" style="color: #585858;">Player</span> <span id="playerNumber" style="color: #86d4ea;">${lastPlayer}</span> <span id="win-label" style="color: #585858;">wins!</span>`;
+      disableBoard();
+      return;
+    }
 
-      // Normal move → switch player
-      switchPlayer();
-      updateTurnIndicator();
+    switchPlayer();
+    updateTurnIndicator();
+    return;
+  }
+
+  // --- CASE: only one peg selected so far ---
+  if (selectedPegs.length === 1) {
+    if (index === first) {
+      // Second click on same peg → remove it alone
+      pegElements[first].classList.add("removed");
+      selectedPegs = [];
+      clearHighlights();
+    } else if (firstPartners.includes(index)) {
+      // Clicked a partner → highlight both (no removal yet)
+      selectedPegs.push(index);
+      pegEl.classList.add("selected");
       return;
     } else {
-      // Clicking other → select independently
+      // Clicked something unrelated → reset
       selectedPegs = [index];
       clearHighlights();
       pegEl.classList.add("selected");
       return;
     }
-  }
 
-  // ----- CASE 2 partners -----
-  if (firstPartners.length === 2) {
-    // If already 2 selected, only clicks on one of these two are valid to remove
-    if (selectedPegs.length === 2) {
-      if (selectedPegs.includes(index)) {
-        // Remove both
-        selectedPegs.forEach(i => pegElements[i].classList.add("removed"));
-        selectedPegs = [];
-        clearHighlights();
-
-        if (checkWin()) {
-          document.getElementById("texts").innerHTML =
-            `<span id="player-label" style="color: #585858;">Player</span> <span id="playerNumber" style="color: #86d4ea;">${lastPlayer}</span> <span id="win-label" style="color: #585858;">wins!</span>`;
-          disableBoard();
-          return; // do NOT switch player
-        }
-
-        // Normal move → switch player
-        switchPlayer();
-        updateTurnIndicator();
-        return;
-      } else {
-        // Click outside → unhighlight both, select new peg
-        selectedPegs = [index];
-        clearHighlights();
-        pegEl.classList.add("selected");
-        return;
-      }
-    }
-
-    // Only 1 selected so far → clicking same peg does nothing
-    if (index === first) return;
-
-    // Clicking connected partner → highlight it
-    if (firstPartners.includes(index)) {
-      selectedPegs.push(index);
-      pegEl.classList.add("selected");
+    if (checkWin()) {
+      document.getElementById("texts").innerHTML =
+        `<span id="player-label" style="color: #585858;">Player</span> <span id="playerNumber" style="color: #86d4ea;">${lastPlayer}</span> <span id="win-label" style="color: #585858;">wins!</span>`;
+      disableBoard();
       return;
     }
 
-    // Clicking anything else → unhighlight first, select new peg
-    selectedPegs = [index];
-    clearHighlights();
-    pegEl.classList.add("selected");
+    switchPlayer();
+    updateTurnIndicator();
     return;
   }
 }
