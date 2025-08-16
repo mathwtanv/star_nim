@@ -1,3 +1,4 @@
+/* STYLES */
 body {
   margin: 0;
   height: 100vh;
@@ -131,6 +132,14 @@ button {
   transition: all 0.2s ease;
   margin-top: -27px;
   margin-left: -100px;
+  position: relative;      /* or fixed/absolute if needed */
+  z-index: 10000;        /* higher than all pegs (which are 10) */
+  pointer-events: auto; 
+}
+
+#info-btn-container {
+  position: relative; /* if not already */
+  z-index: 10000;
 }
 
 #info-overlay {
@@ -182,3 +191,56 @@ button {
   color: #333;
   line-height: 1.5;
 }
+
+/* ---------- Dropdown Container ---------- */
+#mode-container {
+  display: flex;
+  align-items: center; /* aligns dropdown with middle of stacked text */
+  gap: 20px;           /* horizontal space between text and dropdown */
+}
+
+#label-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers the stack vertically relative to dropdown */
+  font-family: 'Bungee', cursive;
+  line-height: 1.1;       /* spacing between Game and Mode */
+  color: #585858;
+}
+
+#line-top, #line-bottom {
+  font-size: 22px;
+}
+
+.line-bottom {
+  display: flex;
+  align-items: center;  /* keeps colon level with dropdown */
+  gap: 5px;             /* spacing between Mode and colon */
+}
+
+.colon {
+  font-size: 22px;      /* match Mode size */
+  font-family: 'Bungee', cursive;
+  transform: translateY(-20px);
+}
+
+/* Dropdown styling */
+#game-mode {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 25.3px;
+  background-color: #FDFBE6;
+  border: 2px solid #86d4ea;
+  border-radius: 12px;
+  padding: 10px 18px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  width: 125px !important; 
+  color: #585858;
+}
+
+#game-mode option {
+  font-family: 'Bitter', serif;
+  text-align: center;
+}
+

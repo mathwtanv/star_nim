@@ -28,8 +28,29 @@
     font-family: 'Berkshire Swash', cursive;
     margin-top: 220px;">
     <div id="texts">
-      <span id="player-label" style="color: #585858;">Player</span> <span id="playerNumber" style="color: #86d4ea;">1</span>
-    </div>
+  <!-- Game mode dropdown (shown first) -->
+  <div id="mode-container">
+  <div id="label-stack">
+    <span class="line-top">Game</span>
+    <span class="line-bottom">Mode<span class="colon">:</span></span>
+  </div>
+  <select id="game-mode">
+    <option value="" selected disabled>Select</option>
+    <option value="2p">2 Player</option>
+    <option value="ai-first">AI First</option>
+    <option value="ai-second">AI Second</option>
+  </select>
+</div>
+
+
+
+
+  <!-- Turn indicator (hidden at start) -->
+  <div id="turn-indicator" style="display: none; font-size: 30px; font-weight: bold; font-family: 'Berkshire Swash', cursive;">
+    <span id="turn-text"></span>
+  </div>
+</div>
+
   <button id="resetBtn">Restart</button>
   </div>
 
